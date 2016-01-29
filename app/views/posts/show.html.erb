@@ -1,0 +1,66 @@
+<div id="pin_show" class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            
+            <div class="panel-heading pin_image">
+                <%= image_tag @post.image.url(:medium) %>
+            </div>
+            <div class="panel-body">
+                <h1><%= @post.title %></h1>
+                <p class="description"><%= @post.description %></p>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p><%= link_to @post.user.fullname, portfolio_path(@post.user.fullname) %></p>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <% if @post.user == current_user %>
+                            <%= link_to "Edit", edit_post_path(@post), class: "btn btn-default" %>
+                            <%= link_to "Verwijder", post_path(@post), method: :delete, data: { confirm: "Weet je het zeker" }, class: "btn btn-default" %>
+                        <% end %>      
+                    </div>
+                      
+                    <div class="col-md-4">
+                        <div class="btn-group pull-right">
+                             <div class="btn-toolbar">        
+                                <div class="btn btn-default"><%= @post.get_upvotes.size %>
+                                <%= link_to "Like", like_post_path(@post), method: :get %></div>
+                                <div class="btn btn-default"><%= @post.get_downvotes.size %>
+                                <%= link_to "Dislike", dislike_post_path(@post), method: :get %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="panel panel-default">
+            <% if @post.comments.count != 0 %>
+                <div class="panel-body">
+                    <h2><%= comment_count = pluralize(@post.comments.count, "Reactie") %>:</h2>
+                    <% @comments.each do |comment| %>
+                        <div class="comment">
+                            <strong><%= comment.user.fullname %></strong>
+                            <p><%= comment.context %></p>
+                        </div>
+                    <% end %>
+                </div>
+            <% else %>
+                <div class="panel-body">
+                    <h2>Nog geen reacties</h2>
+                </div>
+            <% end %>
+            
+            <div class="panel-footer">
+                <div class="row">
+                    <%= render 'comments/form' %>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+
+

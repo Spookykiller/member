@@ -1,0 +1,24 @@
+<%= form_for @post do |f| %>
+    <div class="form-group">
+        <%= f.file_field :image, prompt: "Kies profielfoto...", class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.text_field :title, :class => 'form-control', :placeholder => 'Titel', autofocus: true %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.text_area :description, :class => 'form-control', :placeholder => 'Beschrijving' %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :portfolio_condition do %>
+          <%= f.check_box :portfolio_condition %>
+          Naar portfolio
+        <% end %>
+    </div>
+    
+    <div class="actions">
+        <%= f.submit "Maak post", :class => "btn btn-primary" %>
+    </div>
+<% end %>

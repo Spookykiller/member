@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1><%= @user.fullname %> <small>Staff</small></h1>
+</div>
+<div class="row">
+  <% @user.posts.each do |post| %>
+    <% if post.portfolio_condition == true %>
+      <div class="col-xs-6 col-md-4">
+        <div class="thumbnail">
+          <%= link_to (image_tag post.image.url(:small), class: "img-responsive"), post %>
+          <div class="panel-body">
+            <%= post.title %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+  

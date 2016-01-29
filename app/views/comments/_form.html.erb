@@ -1,0 +1,9 @@
+<%= form_for [@post, @post.comments.build] do |f| %>
+    <div class="form-group">
+        <%= f.text_area :context, :class => 'form-control', :placeholder => 'Antwoord op project' %>
+    </div>    
+    <div class="actions">
+        <%= f.submit "Verstuur", :class => "btn btn-default" %><br>
+    </div>
+<% end %>
+        

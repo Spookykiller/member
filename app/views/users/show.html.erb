@@ -1,0 +1,41 @@
+<div id="pins">
+    <% @posts.each do |post| %>
+        <div class="col-md-4">
+            <div class="box panel panel-default">
+                <div class="post_image">
+                    <%= link_to (image_tag post.image.url(:small)), post %>
+                </div>
+                <div class="post_content">
+                    <div class="title">
+                      <h2><%= link_to post.title, post %></h2>  
+                    </div>
+                    <div class="data clearfix">
+                        <p class="username">Gedeeld door <%= post.user.fullname %></p>
+                        <p class="buttons">
+                            <i class="fa fa-comments-o"></i><span><%= post.comments.count %> Reacties</span>
+                            <i class="fa fa-comments-o"></i><span><%= post.get_likes.size %> Likes</span>
+                        </p>
+                    </div>
+                </div>
+                    <% if post.comments.count != 0 %>
+                        <div id="homecomment" class="panel-footer">
+                            <% post.comments.each do |comment| %>
+                                    <div class="panel-body">
+                                        <div class="comment">
+                                            <strong><%= comment.user.fullname %></strong>
+                                            <p><%= comment.context %></p>
+                                        </div>
+                                    </div>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <div id="homenocomment" class="panel-footer">
+                            <h2>Geen comments</h2>
+                        </div>
+                    <% end %>
+            </div>
+        </div>    
+    <% end %>
+</div>
+
+<%= link_to "Portfolio", user_portfolio_path %>
